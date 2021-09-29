@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+      <!-- Google font-->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+      <!-- Bootstrap -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  <div>
+      <!-- sample Navbar: https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp -->
+      <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+          <!-- Brand -->
+          <a class="navbar-brand" href="/">Node Tunes</a>
+
+          <!-- Toggler/collapsible Button -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Navbar links -->
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link" href="/about">About</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/artists">Artists</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Register</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Login</a>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+  </div>
+
+  {{{body}}}
+  </body>
+</html>
