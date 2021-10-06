@@ -24,6 +24,22 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/artists', artistsRouter)
 
+// mongodb connection w/mongoose
+const mongoose = require('mongoose')
+const globals = require('./config/globals')
+
+mongoose.connect(globals.db, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(
+    (res) => {
+      console.log('Connected to MongoDB')
+    }
+).catch(() => {
+  console.log('Could not connect to MongoDB')
+})
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
