@@ -47,5 +47,60 @@ router.post('/create', (req, res) => {
     })
 })
 
+// GET: /artists/delete/abc123 => delete artist with the _id parameter
+router.get('/delete/:_id', (req, res) => {
+    // get document id from url parameter
+    let _id = req.params._id
+
+    // use Mongoose to delete the document & redirect
+    Artist.remove({ _id: _id }, (err) => {
+        if (err) {
+            console.log(err)
+            res.end(err)
+        }
+        else {
+            res.redirect('/artists')
+        }
+    })
+})
+
+// GET: /artists/edit/abc123 => show pre-populated Edit form
+router.get('/edit/:_id', (req, res) => {
+    // read _id from url param
+    let _id = req.params._id
+
+    // query the db for the selected Artist document
+    Artist.findById(_id, (err, artist) => {
+        if (err) {
+            console.log(err)
+            res.end(err)
+        }
+        else {
+            // load the edit view and pass the selected Artist doc to it for display
+            res.render('artists/edit', {
+                title: 'Artist Details',
+                artist: artist
+            })
+        }
+    })
+})
+
+// POST: /artists/edit/abc123 => update existing Artist doc with values from form submission
+router.post('/edit/:_id', (req, res) => {
+    // get document id from url param
+    let _id = req.params._id
+
+    // Use Mongoose findByIdAndUpdate to save changes to existing doc
+    Artist.findByIdAndUpdate({ _id: _id}, { 'name': req.body.name }, null,(err, artist) => {
+        if (err) {
+            console.log(err)
+            res.end(err)
+        }
+        else {
+            res.redirect('/artists')
+        }
+    })
+})
+
 // make public
 module.exports = router

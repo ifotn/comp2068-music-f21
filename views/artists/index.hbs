@@ -6,6 +6,8 @@
         <div class="card mb-4 text-center h-100">
             <div class="card-body">
                 <h5>{{this.name}}</h5>
+                <a href="/artists/edit/{{this._id}}" class="btn btn-info text-light">Edit</a>
+                <a href="/artists/delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
             </div>
         </div>
     </div>
