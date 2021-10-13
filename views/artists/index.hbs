@@ -1,6 +1,13 @@
 <h1>Artists</h1>
-<ul>
+<a href="/artists/create">Add a New Artist</a>
+<section class="row card-group">
     {{#each artists}}
-        <li>{{this.name}}</li>
+    <div class="col-sm-6 col-lg-4 mb-3">
+        <div class="card mb-4 text-center h-100">
+            <div class="card-body">
+                <h5>{{this.name}}</h5>
+            </div>
+        </div>
+    </div>
     {{/each}}
-</ul>
+</section>
