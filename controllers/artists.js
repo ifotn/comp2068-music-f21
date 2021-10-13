@@ -1,11 +1,11 @@
 // use express
-let express = require('express')
+const express = require('express')
 
 // instantiate an express router to parse and direct url requests
-let router = express.Router()
+const router = express.Router()
 
 // add model ref
-let Artist = require('../models/artist')
+const Artist = require('../models/artist')
 
 // GET: /artists => show index view
 router.get('/', (req, res) => {
@@ -20,6 +20,29 @@ router.get('/', (req, res) => {
                 artists: artists,
                 title: 'Artists'
             })
+        }
+    })
+})
+
+// GET: /artists/create => show new artist form
+router.get('/create', (req, res) => {
+    res.render('artists/create', {
+        title: 'Add a New Artist'
+    })
+})
+
+// POST: /artists/create => process form submission & save new Artist document
+router.post('/create', (req, res) => {
+    // use Mongoose model to create a new Artist document
+    Artist.create({
+        name: req.body.name
+    }, (err, newArtist) => {
+        if (err) {
+            console.log(err)
+            res.end(err)
+        }
+        else { // save successful; update artists list view
+            res.redirect('/artists')
         }
     })
 })
