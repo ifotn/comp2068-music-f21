@@ -7,14 +7,18 @@ const User = require('../models/user')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Node Tunes' });
+  res.render('index', {
+    title: 'Node Tunes',
+    user: req.user
+  });
 });
 
 // GET: /about
 router.get('/about', (req, res) => {
   res.render('about', {
     title: 'About this Site',
-    content: 'This is some info about our music library'
+    content: 'This is some info about our music library',
+    user: req.user
   })
 })
 
@@ -44,12 +48,23 @@ router.post('/register', (req, res) => {
   })
 })
 
-
 // GET: /login
 router.get('/login', (req, res) => {
+  // check the session for error messages
+  let messages = req.session.messages || []
+  req.session.messages = []
+
   res.render('login', {
-    title: 'Login'
+    title: 'Login',
+    messages: messages
   })
 })
+
+// POST: /login - passport.authenticate does all the work behind the scenes to validate the login attempt
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/artists',
+  failureRedirect: '/login',
+  failureMessage: 'Invalid Login' // stored in the session object
+}))
 
 module.exports = router;

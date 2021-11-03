@@ -7,6 +7,9 @@ const router = express.Router()
 // add model ref
 const Artist = require('../models/artist')
 
+// passport for auth
+const passport = require('passport')
+
 // GET: /artists => show index view
 router.get('/', (req, res) => {
     // use Artist model to fetch all documents from artists collection in mongodb
@@ -18,7 +21,8 @@ router.get('/', (req, res) => {
         else {
             res.render('artists/index', {
                 artists: artists,
-                title: 'Artists'
+                title: 'Artists',
+                user: req.user
             })
         }
     })
@@ -27,7 +31,8 @@ router.get('/', (req, res) => {
 // GET: /artists/create => show new artist form
 router.get('/create', (req, res) => {
     res.render('artists/create', {
-        title: 'Add a New Artist'
+        title: 'Add a New Artist',
+        user: req.user
     })
 })
 
@@ -79,7 +84,8 @@ router.get('/edit/:_id', (req, res) => {
             // load the edit view and pass the selected Artist doc to it for display
             res.render('artists/edit', {
                 title: 'Artist Details',
-                artist: artist
+                artist: artist,
+                user: req.user
             })
         }
     })
