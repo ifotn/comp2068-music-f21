@@ -1,13 +1,17 @@
 <h1>Artists</h1>
-<a href="/artists/create">Add a New Artist</a>
+{{#if user}}
+    <a href="/artists/create">Add a New Artist</a>
+{{/if}}
 <section class="row card-group">
     {{#each artists}}
     <div class="col-sm-6 col-lg-4 mb-3">
         <div class="card mb-4 text-center h-100">
             <div class="card-body">
                 <h5>{{this.name}}</h5>
-                <a href="/artists/edit/{{this._id}}" class="btn btn-info text-light">Edit</a>
-                <a href="/artists/delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
+                {{#if ../user}}
+                    <a href="/artists/edit/{{this._id}}" class="btn btn-info text-light">Edit</a>
+                    <a href="/artists/delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
+                {{/if}}
             </div>
         </div>
     </div>
