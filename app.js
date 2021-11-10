@@ -40,12 +40,10 @@ passport.use(new gitHub({
     clientID: globals.gitHub.clientID,
     clientSecret: globals.gitHub.clientSecret,
     callbackURL: globals.gitHub.callbackURL
-},
-    async (accessToken, refreshToken, profile, callback) => {
+}, async (accessToken, refreshToken, profile, callback) => {
         try {
             // check if GitHub user already exists in our db
             const user = await User.findOne({ oauthId: profile.id })
-
             if (user) {
                 return callback(null, user) // user already exist so return user object and continue
             }
