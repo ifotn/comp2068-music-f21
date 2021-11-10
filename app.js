@@ -54,7 +54,7 @@ passport.use(new gitHub({
                     oauthProvider: 'GitHub',
                     oauthId: profile.id
                 })
-                const savedUser = await newUser.Save()
+                const savedUser = await newUser.save()
                 callback(null, savedUser)
             }
         }

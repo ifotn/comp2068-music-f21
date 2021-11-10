@@ -7,7 +7,12 @@ var artistSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    }
+    },
+    albums: [{
+        title: String,
+        year: Number,
+        rating: Number
+    }]
 })
 
 // make this model public with the name of Artist

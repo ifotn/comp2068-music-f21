@@ -119,5 +119,30 @@ router.post('/edit/:_id', authCheck,(req, res) => {
     })
 })
 
+// POST: /artists/add-album/abc123 => save new album to existing artist doc in nested albums array
+router.post('/add-album/:_id', authCheck, (req, res) => {
+    // get selected artist
+    Artist.findById(req.params._id, (err, artist) => {
+        if (err) {
+            res.send(err)
+        }
+        else {
+            artist.albums.push({
+                title: req.body.title,
+                year: req.body.year,
+                rating: req.body.rating
+            })
+            artist.save((err, artist) => {
+                if (err) {
+                    res.send(err)
+                }
+                else {
+                    res.redirect('/artists/edit/' + req.params._id)
+                }
+            })
+        }
+    })
+})
+
 // make public
 module.exports = router
